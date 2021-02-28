@@ -6,6 +6,7 @@
         <artifactId>base-dependency</artifactId>
         <groupId>com.isoftstone.qmp</groupId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath/>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -16,4 +17,32 @@
     <description>
         框架核心
     </description>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <maven-jar-plugin.version>3.8.1</maven-jar-plugin.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <!-- 该插件指定在编译项目时的java版本,避免当前项目结构变动时导致语言level变为5 -->
+            <plugin>
+                <!-- 指定maven编译的jdk版本,如果不指定,maven3默认用jdk 1.5 maven2默认用jdk1.3 -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-jar-plugin.version}</version>
+                <configuration>
+                    <!-- 一般而言，target与source是保持一致的，但是，有时候为了让程序能在其他版本的jdk中运行(对于低版本目标jdk，源代码中不能使用低版本jdk中不支持的语法)，会存在target不同于source的情况 -->
+                    <!-- 源代码使用的JDK版本 -->
+                    <source>${java.version}</source>
+                    <!-- 需要生成的目标class文件的编译版本 -->
+                    <target>${java.version}</target>
+                    <!-- 字符集编码 -->
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
